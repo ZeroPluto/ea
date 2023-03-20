@@ -15,7 +15,6 @@
     <!-- Import component library -->
     <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
     <style>
-        /* 样式参考自https://www.cnblogs.com/wenruo/p/9732704.html*/
         * { /* 重置默认样式 */
             margin: 0;
             padding: 0;
@@ -373,7 +372,7 @@
                 placeholder="请输入内容"
                 v-model="randomListText">
         </el-input>
-        <span style="font-size: 12px;text-align: left">请使用空格对食物进行分隔，如：“牛肉 鸡排 汉堡”</span>
+        <span style="font-size: 12px;text-align: left">请使用空格对食物进行分隔，如：“干锅 鸡排 汉堡”</span>
         <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="saveRandomList">确 定</el-button>
@@ -388,7 +387,7 @@
     const toEat = createApp({
         setup() {
             // 当前转盘数据
-            let foodList = ref(["北京烤鸭", "烧鸡", "快餐", "麻辣烫", "炒饭", "面", "寿司", "烤肉", "火锅", "饺子"])
+            let foodList = ref(["麻辣香锅", "炒面", "干锅", "麻辣烫", "老盒饭", "米线", "寿司", "木桶饭", "水煮鱼", "饺子"])
             // 转盘旋转状态
             let onRotation = ref(false);
 
@@ -432,11 +431,11 @@
             function afterTransitionend() {
                 setTimeout(() => { // 等闪烁三下结束
                     onRotation.value = false; //结束旋转状态
-                    result.value = `就决定是你了！${nextStatus.food}`; //更新结果文案为下一步状态的文案
+                    result.value = `就吃你啦！${nextStatus.food}`; //更新结果文案为下一步状态的文案
                 }, 300);
             }
 
-            let randomList = ['北京烤鸭', '泰餐', '寿司', '烧鸡', '盖浇饭', '砂锅', '大排档', '米线', '满汉全席', '西餐', '麻辣烫', '自助餐', '炒面', '快餐', '水果', '西北风', '馄饨', '火锅', '烧烤', '泡面', '速冻水饺', '日本料理', '涮羊肉', '味千拉面', '肯德基', '面包', '扬州炒饭', '自助餐', '茶餐厅', '海底捞', '咖啡', '比萨', '麦当劳', '兰州拉面', '沙县小吃', '烤鱼', '海鲜', '铁板烧', '韩国料理', '粥', '快餐', '东南亚菜', '甜点', '农家菜', '川菜', '粤菜', '湘菜', '本帮菜', '竹笋烤肉']
+            let randomList = ['重庆小面', '自选', '寿司', '叉烧', '盖浇饭', '石板饭', '鸡排饭', '米线', '猪脚饭', '冒菜', '麻辣烫', '瓦罐鸡', '炒面', '拌鸡腿', '水果', '小肉', '馄饨', '火锅', '烧烤', '泡面', '速冻水饺', '酱香饼', '羊肉汤', '千拉面', '鸡腿饭', '面包', '扬州炒饭', '自助餐', '茶餐厅', '海底捞', '咖啡', '比萨', '麦当劳', '兰州拉面', '沙县小吃', '烤鱼', '海鲜', '铁板烧', '韩国料理', '粥', '快餐', '东南亚菜', '甜点', '农家菜', '川菜', '粤菜', '湘菜', '本帮菜', '竹笋烤肉']
 
             //获取一个随机数
             function randomNumBoth(Min, Max) {
@@ -464,7 +463,7 @@
                 let currentDeg = nextStatus.deg; //如果当前已有角度则获取角度 无则为0
                 //获取结果位置的食物
                 nextStatus.food = foodList.value[Math.floor((currentDeg + 18) % 360 / 36)];
-                result.value = `就决定是你了！${nextStatus.food}`;
+                result.value = `就吃你啦！${nextStatus.food}`;
             }
 
             handleRandom();
@@ -501,7 +500,7 @@
                 if (!nextStatus.deg || !isResult) return;//修改结果中的食物
                 //获取结果位置的食物
                 nextStatus.food = randomList[number];
-                result.value = `就决定是你了！${nextStatus.food}`;
+                result.value = `就吃你啦！${nextStatus.food}`;
             }
 
             function handleEdit(index) {
@@ -519,7 +518,7 @@
                     if (!nextStatus.deg || !isResult) return;//修改结果中的食物
                     //获取结果位置的食物
                     nextStatus.food = value;
-                    result.value = `就决定是你了！${nextStatus.food}`;
+                    result.value = `就吃你啦！${nextStatus.food}`;
                 }).catch(() => {
                     ElMessage({
                         type: 'info',
